@@ -9,7 +9,7 @@ class SimpleActionExecutor:
       self.gerrit_client = GerritClient("gerrit-host")
       self.action = action
       self.filter = filter
-      print self.gerrit_client.gerrit_version()
+      self.gerrit_client.gerrit_version()
 
    def do_work(self):
 

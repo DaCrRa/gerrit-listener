@@ -1,18 +1,9 @@
-from pygerrit.client import GerritClient
-
 from filters.AnyEventMatchesFilter import AnyEventMatchesFilter
 from actions.PrintEvent import PrintEvent
-
-client = GerritClient("gerrit-host")
+from action_executors.SimpleActionExecutor import SimpleActionExecutor
 
 filter = AnyEventMatchesFilter()
 action = PrintEvent()
 
-print client.gerrit_version()
-
-client.start_event_stream()
-
-while True:
-   event = client.get_event()
-   if filter.filter_event(event):
-      action.execute_for_event(event)
+executor = SimpleActionExecutor(action, filter)
+executor.do_work()

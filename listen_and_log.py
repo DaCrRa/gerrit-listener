@@ -1,11 +1,11 @@
 from pygerrit.client import GerritClient
 
-from filters.GerritEventFilter import GerritEventFilter
+from filters.AnyEventMatchesFilter import AnyEventMatchesFilter
 from actions.ActionForGerritEvent import ActionForGerritEvent
 
 client = GerritClient("gerrit-host")
 
-filter = GerritEventFilter()
+filter = AnyEventMatchesFilter()
 action = ActionForGerritEvent()
 
 print client.gerrit_version()

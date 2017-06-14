@@ -7,3 +7,20 @@ class GerritEventFilter:
    @abc.abstractmethod
    def filter_event(self, event):
       raise NotImplementedError()
+
+class CompositeAndFilter(GerritEventFilter):
+
+   def __init__(self):
+      self.filters = []
+
+   def add_filter(self, gerrit_event_filter):
+      self.filters.append(gerrit_event_filter)
+      return self
+
+   def filter_event(self, event):
+      filter_matches = True
+      for filter in self.filters:
+         filter_matches = filter_matches and filter.filter_event(event)
+         if not filter_matches:
+            break
+      return filter_matches

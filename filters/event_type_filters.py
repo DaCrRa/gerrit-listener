@@ -1,6 +1,6 @@
 from GerritEventFilter import GerritEventFilter
 
-from pygerrit.events import ReviewerAddedEvent
+from pygerrit.events import ReviewerAddedEvent, PatchsetCreatedEvent
 
 class ReviewerAddedFilter(GerritEventFilter):
 
@@ -15,3 +15,10 @@ class ReviewerAddedFilter(GerritEventFilter):
             return True
       else:
          return False
+
+
+
+class PatchsetCreatedFilter(GerritEventFilter):
+
+   def filter_event(self, event):
+      return isinstance(event, PatchsetCreatedEvent)

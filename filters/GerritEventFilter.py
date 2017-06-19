@@ -8,7 +8,13 @@ class GerritEventFilter:
    def filter_event(self, event):
       raise NotImplementedError()
 
-class CompositeAndFilter(GerritEventFilter):
+class CompositeGerritEventFilter(GerritEventFilter):
+
+   __metaclass__ = abc.ABCMeta
+
+   @abc.abstractmethod
+   def filter_event(self, event):
+      raise NotImplementedError()
 
    def __init__(self):
       self.filters = []
@@ -16,6 +22,8 @@ class CompositeAndFilter(GerritEventFilter):
    def add_filter(self, gerrit_event_filter):
       self.filters.append(gerrit_event_filter)
       return self
+
+class CompositeAndFilter(CompositeGerritEventFilter):
 
    def filter_event(self, event):
       filter_matches = True

@@ -8,7 +8,7 @@ from action_executors.SimpleActionExecutor import SimpleActionExecutor
 
 filter = ( CompositeAndFilter()
               .add_filter(PatchsetCreatedFilter())
-              .add_filter(ChangeOwnerFilter(["list", "of", "annoying", "reviewers"])) )
+              .add_filter(ChangeOwnerFilter(["list", "of", "annoying", "reviewers"]))
          )
 
 action = SetScoreLabels("gerrit-host", 2, 1)

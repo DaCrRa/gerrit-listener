@@ -32,3 +32,13 @@ class CompositeAndFilter(CompositeGerritEventFilter):
          if not filter_matches:
             break
       return filter_matches
+
+class CompositeOrFilter(CompositeGerritEventFilter):
+
+   def filter_event(self, event):
+      filter_matches = False
+      for filter in self.filters:
+         filter_matches = filter_matches or filter.filter_event(event)
+         if filter_matches:
+            break
+      return filter_matches
